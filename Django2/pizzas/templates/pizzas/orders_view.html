@@ -1,0 +1,44 @@
+{% extends 'pizzas/base.html' %}
+
+{% block page_header %}
+    <img src="https://i.imgur.com/olxvhk5.jpg" style="width: 100%;" />
+{% endblock page_header %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nr zamówienia</th>
+            <th scope="col">Pizza</th>
+            <th scope="col">Wielkość</th>
+            <th scope="col">Sos_1</th>
+            <th scope="col">Sos_2</th>
+            <th scope="col">Dostawa</th>
+            <th scope="col">Data zamówienia</th>
+        {% if user.username == 'pizza_admin' %}
+            <th></th>
+        {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+            <th scope="row">{{ order.id }}</th>
+            <td>{{ order.pizza.name }}</td>
+            <td>{{ order.size }}</td>
+            <td>{{ order.sauce1 }}</td>
+            <td>{{ order.sauce2 }}</td>
+            <td>{{ order.deliver }}</td>
+            <td>{{ order.date_order|date:'d M Y H:i'  }}</td>
+            {% if user.username == 'pizza_admin' %}
+                <td><a href="{% url 'pizzas:edit_order' order.id %}">Zmień</a></td>
+            {% endif %}
+        </tr>
+    {% empty %}
+        <tr><td colspan="7">Brak zamówień</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

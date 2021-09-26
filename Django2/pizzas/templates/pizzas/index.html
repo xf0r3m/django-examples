@@ -1,0 +1,11 @@
+{% extends 'pizzas/base.html' %}
+
+{% block page_header %}
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Dolce&Gusto</h1>
+      <p>Pyszna pizza tylko na dowóz. Zamów już dziś.</p>
+      <p><a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" role="button">Zarejestruj się &raquo;</a></p>
+    </div>
+</div>
+{% endblock page_header %}
